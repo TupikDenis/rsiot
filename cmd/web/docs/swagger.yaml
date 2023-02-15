@@ -1,0 +1,449 @@
+basePath: /
+definitions:
+  models.MarkRequestBody:
+    properties:
+      mark:
+        type: integer
+      subject_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  models.SubjectRequestBody:
+    properties:
+      name:
+        type: string
+    type: object
+  models.TransformedMark:
+    properties:
+      id:
+        type: integer
+      mark:
+        type: integer
+      subject_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  models.TransformedSubject:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.TransformedUser:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.UserRequestBody:
+    properties:
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: RSIOT labs
+  title: RSIOT
+  version: "1.0"
+paths:
+  /marks:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedMark'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Without any parameters
+      tags:
+      - mark
+    post:
+      parameters:
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.MarkRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves mark based on given JSON
+      tags:
+      - mark
+  /marks/{id}:
+    delete:
+      parameters:
+      - description: Mark ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves mark based on given ID
+      tags:
+      - mark
+    get:
+      parameters:
+      - description: Mark ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedMark'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves mark based on given ID
+      tags:
+      - mark
+    patch:
+      parameters:
+      - description: Mark ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.MarkRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves mark based on given ID and JSON
+      tags:
+      - mark
+  /marks/subjects/{id}:
+    get:
+      parameters:
+      - description: Subject ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedMark'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves mark based on given subject ID
+      tags:
+      - mark
+  /marks/users/{id}:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedMark'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves mark based on given user ID
+      tags:
+      - mark
+  /marks/users/{id}/subjects/{idSub}:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Subject ID
+        in: path
+        name: idSub
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedMark'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves mark based on given subject user and subject ID
+      tags:
+      - mark
+  /subjects:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedSubject'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Without any parameters
+      tags:
+      - subject
+    post:
+      parameters:
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.SubjectRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves subject based on given JSON
+      tags:
+      - subject
+  /subjects/{id}:
+    delete:
+      parameters:
+      - description: Subject ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves subject based on given ID
+      tags:
+      - subject
+    get:
+      parameters:
+      - description: Subject ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedSubject'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves subject based on given ID
+      tags:
+      - subject
+    patch:
+      parameters:
+      - description: Subject ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.SubjectRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves subject based on given ID and JSON
+      tags:
+      - subject
+  /users:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedUser'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Without any parameters
+      tags:
+      - user
+    post:
+      parameters:
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves user based on given JSON
+      tags:
+      - user
+  /users/{id}:
+    delete:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves user based on given ID
+      tags:
+      - user
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TransformedUser'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Retrieves user based on given ID
+      tags:
+      - user
+    patch:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: InstanceCreateReq
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Retrieves user based on given ID and JSON
+      tags:
+      - user
+swagger: "2.0"
