@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	_ "rsiot/pkg/models"
 )
 
@@ -14,14 +15,23 @@ func createRouter() *gin.Engine {
 func cORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "*")
 		c.Header("Access-Control-Allow-Headers", "*")
+		c.Header("Content-Type", "application/json")
 
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(204)
-			return
+		// Second, we handle the OPTIONS problem
+		if c.Request.Method != "OPTIONS" {
+
+			c.Next()
+
+		} else {
+
+			// Everytime we receive an OPTIONS request,
+			// we just return an HTTP 200 Status Code
+			// Like this, Angular can now do the real
+			// request using any other method than OPTIONS
+			c.AbortWithStatus(http.StatusOK)
 		}
-
-		c.Next()
 	}
 }
 
