@@ -6,7 +6,10 @@ import (
 )
 
 func startServer(router *gin.Engine, port string) {
-	router.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	router.Use(cors.New(config))
+
 	err := router.Run(port)
 
 	if err != nil {
