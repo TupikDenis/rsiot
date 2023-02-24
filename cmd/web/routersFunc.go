@@ -6,6 +6,7 @@ import (
 	"rsiot/pkg/handlers/mark"
 	"rsiot/pkg/handlers/subject"
 	"rsiot/pkg/handlers/user"
+	_ "rsiot/pkg/models"
 	"strconv"
 )
 
