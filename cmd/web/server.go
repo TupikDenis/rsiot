@@ -8,6 +8,7 @@ import (
 func startServer(router *gin.Engine, port string) {
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
+	config.AllowHeaders = []string{"PUT", "POST", "DELETE", "GET"}
 	router.Use(cors.New(config))
 
 	err := router.Run(port)
