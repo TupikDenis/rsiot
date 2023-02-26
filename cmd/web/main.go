@@ -1,5 +1,7 @@
 package main
 
+import _ "rsiot/cmd/web/docs"
+
 // @title 			RSIOT
 // @version 		1.0
 // @description 	RSIOT labs
