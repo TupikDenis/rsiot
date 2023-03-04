@@ -1,11 +1,15 @@
-FROM golang:latest AS builder
+FROM golang:alpine as builder
 WORKDIR /app
-COPY . .
+COPY go.mod go.sum ./
 RUN go mod download
-RUN go build -o ./go-demo ./cmd/web/.
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/web/.
 
-FROM alpine:latest AS runner
-WORKDIR /app
-COPY --from=builder /app/go-demo .
+# Start a new stage from scratch
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /app/main .
 EXPOSE 8080
-CMD ["/go-demo"]
+
+CMD ["./main"]

@@ -10,6 +10,12 @@ import (
 	"strconv"
 )
 
+func text(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"text": "Hi",
+	})
+}
+
 // AddUser godoc
 // @Summary Retrieves user based on given JSON
 // @Produce json

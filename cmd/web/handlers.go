@@ -11,6 +11,7 @@ func handle() {
 	subjectRouterGroup(router)
 	markRouterGroup(router)
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.GET("/", text)
 
 	startServer(router, ":8080")
 }
